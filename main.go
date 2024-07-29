@@ -1,8 +1,6 @@
 package main
 
-import (
-	"log"
-
+import(
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,8 +11,5 @@ func main(){
 		ctx.JSON(200, gin.H{"message": "Hello, World!"})
 	})
 
-	err := r.Run(":8080")
-	if err!=nil{
-		log.Fatal(err)
-	}
+	r.Run(":8080")
 }
