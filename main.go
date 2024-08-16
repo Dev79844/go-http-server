@@ -1,12 +1,16 @@
 package main
 
 import (
-	"log"
+	"app/database"
 
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 func main(){
+
+	database.SetupDB()
+
 	r := gin.Default()
 
 	r.GET("/hello", func(ctx *gin.Context) {

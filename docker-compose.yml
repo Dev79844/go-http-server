@@ -1,0 +1,36 @@
+services:
+  database:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - skynet
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    depends_on:
+      - database
+    networks:
+      - skynet
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
+
+volumes:
+  pgdata:
+
+networks:
+  skynet:
